@@ -1,6 +1,6 @@
 import googleapiclient.discovery
 
-KEY = 'AIzaSyAgkB_zpAQg_ayoT0qVZVtyD7NNOodWPZA'
+KEY = ''
 CHANNEL_NAME = 't0digital'
 
 youtube = googleapiclient.discovery.build('youtube', 'v3', developerKey=KEY)
