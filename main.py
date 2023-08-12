@@ -13,7 +13,10 @@ def get_video_ids_from_channel(channel_name):
         playlistId=playlist_id,
         maxResults=10
     ).execute()
-    print(response)
+    ids = []
+    for video in response['items']:
+        ids.append(video['id'])
+    return ids
 
 def get_playlist_id(channel_name):
     # получаем информацию о канале
