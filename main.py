@@ -1,6 +1,6 @@
 import googleapiclient.discovery
 
-KEY = 'AIzaSyAgkB_zpAQg_ayoT0qVZVtyD7NNOodWPZA'
+KEY = ''
 CHANNEL_NAME = 'myrusakov' #'LojazDmitry'
 
 youtube = googleapiclient.discovery.build('youtube', 'v3', developerKey=KEY)
@@ -15,7 +15,7 @@ def get_video_ids_from_channel(channel_name):
     ).execute()
     ids = []
     for video in response['items']:
-        ids.append(video['id'])
+        ids.append(video['snippet']['resourceId']['videoId'])
     return ids
 
 def get_playlist_id(channel_name):
@@ -26,11 +26,19 @@ def get_playlist_id(channel_name):
     ).execute()
     return response['items'][0]['contentDetails']['relatedPlaylists']['uploads']
 
-def print_videos_info(videos):
+def print_videos_info(videos_ids):
     response = youtube.videos().list(
-        part="statistics",
-        id=','.join(videos)
+        part="statistics, snippet",
+        id=','.join(videos_ids)
     ).execute()
+    for video in response['items']:
+        print('Название:', video['snippet']['title'])
+        print('Просмотры:', video['statistics']['viewCount'])
+        print('Лайков:', video['statistics']['likeCount'])
+        #print('Дизлайков:', video['statistics']['dislikeCount'])
+        print('-------------------------------------')
+
+
 
 
 # Press the green button in the gutter to run the script.
