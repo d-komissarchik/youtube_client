@@ -1,7 +1,7 @@
 import googleapiclient.discovery
 
-KEY = ''
-CHANNEL_NAME = 'myrusakov'#'LojazDmitry'
+KEY = 'AIzaSyAgkB_zpAQg_ayoT0qVZVtyD7NNOodWPZA'
+CHANNEL_NAME = 'myrusakov' #'LojazDmitry'
 
 youtube = googleapiclient.discovery.build('youtube', 'v3', developerKey=KEY)
 
@@ -26,8 +26,14 @@ def get_playlist_id(channel_name):
     ).execute()
     return response['items'][0]['contentDetails']['relatedPlaylists']['uploads']
 
+def print_videos_info(videos):
+    response = youtube.videos().list(
+        part="statistics",
+        id=','.join(videos)
+    ).execute()
+
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     videos = get_video_ids_from_channel(CHANNEL_NAME)
-    # print_videos_info(videos)
+    print_videos_info(videos)
