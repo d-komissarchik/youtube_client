@@ -18,6 +18,8 @@ def get_video_ids_from_channel(channel_name):
         ids.append(video['snippet']['resourceId']['videoId'])
     return ids
 
+
+
 def get_playlist_id(channel_name):
     # получаем информацию о канале
     response = youtube.channels().list(
